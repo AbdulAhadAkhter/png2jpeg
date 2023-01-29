@@ -17,15 +17,20 @@ import (
 var (
 	FilePath   string
 	OutputPath string
+	Quality    int
 )
 var convertCmd = &cobra.Command{
 	Use:   "convert",
 	Short: "Convert png images to jpeg",
 	Long:  `Convert png images to jpeg`,
 	Run: func(cmd *cobra.Command, args []string) {
+
+		if !strings.HasSuffix(FilePath, "/") {
+			FilePath += "/"
+		}
 		paths, _ := filepath.Glob(FilePath + "*.png")
 		for _, path := range paths {
-			convertPNGtoJPEG(path, OutputPath)
+			convertPNGtoJPEG(path, OutputPath, Quality)
 		}
 	},
 }
@@ -34,11 +39,12 @@ func init() {
 	rootCmd.AddCommand(convertCmd)
 	convertCmd.Flags().StringVarP(&FilePath, "path", "p", "", "Path to images")
 	convertCmd.Flags().StringVarP(&OutputPath, "output", "o", "", "Output path to convert images to")
+	convertCmd.Flags().IntVarP(&Quality, "quality", "q", 0, "Output path to convert images to")
 	convertCmd.MarkFlagRequired("path")
 
 }
 
-func convertPNGtoJPEG(path, OutputPath string) error {
+func convertPNGtoJPEG(path, OutputPath string, Quality int) error {
 	file, err := os.Open(path)
 	if err != nil {
 		return err
@@ -66,5 +72,9 @@ func convertPNGtoJPEG(path, OutputPath string) error {
 	}
 	defer out.Close()
 
-	return jpeg.Encode(out, img, nil)
+	if Quality == 0 {
+		Quality = 80
+	}
+
+	return jpeg.Encode(out, img, &jpeg.Options{Quality: Quality})
 }
