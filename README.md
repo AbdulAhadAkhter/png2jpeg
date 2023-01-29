@@ -30,4 +30,8 @@ example: png2jpeg convert --path ./images/
 
 example: png2jpeg convert --path ./images/ --output ./images/test
 
+--quality -q [optional] 80 [Default]
+
+example: png2jpeg convert --path ./images/ --quality 100
+
 ```
