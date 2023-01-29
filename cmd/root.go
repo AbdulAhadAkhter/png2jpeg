@@ -11,8 +11,8 @@ import (
 
 var rootCmd = &cobra.Command{
 	Use:   "png2jpeg",
-	Short: "A small utility to convert png images to jpeg in current directory",
-	Long:  `A small utility to convert png images to jpeg in current directory`,
+	Short: "A small utility to convert png images to jpeg in an output directory",
+	Long:  `A small utility to convert png images to jpeg in an output directory`,
 }
 
 func Execute() {
