@@ -18,3 +18,16 @@ Flags:
 
 Use "png2jpeg [command] --help" for more information about a command
 ```
+
+Convert command takes the following flags:
+
+```
+--path -p [required]  /path/to/image/files
+
+example: png2jpeg convert --path ./images/
+
+--output -o [optional] /path/to/output/images
+
+example: png2jpeg convert --path ./images/ --output ./images/test
+
+```
