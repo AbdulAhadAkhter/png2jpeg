@@ -15,7 +15,7 @@ import (
 )
 
 var (
-	FilePath   string
+	InputPath  string
 	OutputPath string
 	Quality    int
 )
@@ -25,10 +25,10 @@ var convertCmd = &cobra.Command{
 	Long:  `Convert png images to jpeg`,
 	Run: func(cmd *cobra.Command, args []string) {
 
-		if !strings.HasSuffix(FilePath, "/") {
-			FilePath += "/"
+		if !strings.HasSuffix(InputPath, "/") {
+			InputPath += "/"
 		}
-		paths, _ := filepath.Glob(FilePath + "*.png")
+		paths, _ := filepath.Glob(InputPath + "*.png")
 		for _, path := range paths {
 			convertPNGtoJPEG(path, OutputPath, Quality)
 		}
@@ -37,7 +37,7 @@ var convertCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(convertCmd)
-	convertCmd.Flags().StringVarP(&FilePath, "path", "p", "", "Path to images")
+	convertCmd.Flags().StringVarP(&InputPath, "path", "p", "", "Path to images")
 	convertCmd.Flags().StringVarP(&OutputPath, "output", "o", "", "Output path to convert images to")
 	convertCmd.Flags().IntVarP(&Quality, "quality", "q", 0, "Output path to convert images to")
 	convertCmd.MarkFlagRequired("path")
