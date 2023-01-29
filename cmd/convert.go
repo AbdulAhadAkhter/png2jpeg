@@ -34,6 +34,8 @@ func init() {
 	rootCmd.AddCommand(convertCmd)
 	convertCmd.Flags().StringVarP(&FilePath, "path", "p", "", "Path to images")
 	convertCmd.Flags().StringVarP(&OutputPath, "output", "o", "", "Output path to convert images to")
+	convertCmd.MarkFlagRequired("path")
+
 }
 
 func convertPNGtoJPEG(path, OutputPath string) error {
