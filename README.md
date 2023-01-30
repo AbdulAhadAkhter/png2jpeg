@@ -9,13 +9,15 @@ Usage:
   png2jpeg [command]
 
 Available Commands:
-  convert     Convert png images to jpeg
   help        Help about any command
 
 Flags:
-  -h, --help     help for png2jpeg
-  -t, --toggle   Help message for toggle
-
+  -h, --help            help for png2jpeg
+  -o, --output string   Output path to convert images to
+  -p, --path string     Path to images
+  -q, --quality int     Output path to convert images to
+  -t, --toggle          Help message for toggle
+  
 Use "png2jpeg [command] --help" for more information about a command
 ```
 
@@ -24,14 +26,14 @@ Convert command takes the following flags:
 ```
 --path -p [required]  /path/to/image/files
 
-example: png2jpeg convert --path ./images/
+example: png2jpeg --path ./images/
 
 --output -o [optional] /path/to/output/images
 
-example: png2jpeg convert --path ./images/ --output ./images/test
+example: png2jpeg --path ./images/ --output ./images/test
 
 --quality -q [optional] 80 [Default]
 
-example: png2jpeg convert --path ./images/ --quality 100
+example: png2jpeg --path ./images/ --quality 100
 
 ```
