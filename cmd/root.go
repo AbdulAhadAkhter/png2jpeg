@@ -15,23 +15,58 @@ import (
 )
 
 var (
-	InputPath  string
-	OutputPath string
-	Quality    int
+	SingleFile  string
+	BatchFolder string
+	OutputPath  string
+	Quality     int
 )
 var rootCmd = &cobra.Command{
 	Use:   "png2jpeg",
 	Short: "A small utility to convert png images to jpeg in an output directory",
 	Long:  `A small utility to convert png images to jpeg in an output directory`,
+	// PreRun: func(cmd *cobra.Command, args []string) {},
 	Run: func(cmd *cobra.Command, args []string) {
 
-		if !strings.HasSuffix(InputPath, "/") {
-			InputPath += "/"
+		if SingleFile != "" && BatchFolder != "" {
+			fmt.Println("Error: both variables provided, please provide only one")
+			return
 		}
-		paths, _ := filepath.Glob(InputPath + "*.png")
-		for _, path := range paths {
-			convertPNGtoJPEG(path, OutputPath, Quality)
+		if SingleFile != "" {
+
+			if !strings.HasSuffix(SingleFile, ".png") {
+				fmt.Println("Can only convert png files")
+				return
+			}
+
+			_, err := os.Stat(SingleFile)
+			if os.IsNotExist(err) {
+				fmt.Println("file does not exist:", SingleFile)
+				return
+			}
+
+			fmt.Println("Converting file: ", SingleFile)
+			convertPNGtoJPEG(SingleFile, OutputPath, Quality)
 		}
+		if BatchFolder != "" {
+			if strings.HasSuffix(BatchFolder, ".png") {
+				fmt.Println("Only provide folders for tbe batch flag")
+				return
+			}
+			if !strings.HasSuffix(BatchFolder, "/") {
+				BatchFolder += "/"
+			}
+			_, err := os.Stat(BatchFolder)
+			if os.IsNotExist(err) {
+				fmt.Println("path does not exist:", BatchFolder)
+				return
+			}
+			fmt.Println("Batch exporting files in: ", BatchFolder)
+			paths, _ := filepath.Glob(BatchFolder + "*.png")
+			for _, path := range paths {
+				convertPNGtoJPEG(path, OutputPath, Quality)
+			}
+		}
+
 	},
 }
 
@@ -44,10 +79,10 @@ func Execute() {
 
 func init() {
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-	rootCmd.Flags().StringVarP(&InputPath, "path", "p", "", "Path to images")
+	rootCmd.Flags().StringVarP(&SingleFile, "single", "s", "", "Path to images")
+	rootCmd.Flags().StringVarP(&BatchFolder, "batch", "b", "", "Path to images")
 	rootCmd.Flags().StringVarP(&OutputPath, "output", "o", "", "Output path to convert images to")
 	rootCmd.Flags().IntVarP(&Quality, "quality", "q", 0, "Output path to convert images to")
-	rootCmd.MarkFlagRequired("path")
 	rootCmd.CompletionOptions.DisableDefaultCmd = true
 
 }
