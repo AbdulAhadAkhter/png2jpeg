@@ -37,3 +37,9 @@ example: png2jpeg --path ./images/ --output ./images/test
 example: png2jpeg --path ./images/ --quality 100
 
 ```
+
+## TODO
+
+* Play around with github actions (DONEISH) 
+* Add tests
+* Build a release pipeline

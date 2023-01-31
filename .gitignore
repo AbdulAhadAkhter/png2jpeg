@@ -4,7 +4,6 @@
 *.dll
 *.so
 *.dylib
-*.png
 *.jpeg
 *.jpg
 
