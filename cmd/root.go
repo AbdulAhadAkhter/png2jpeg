@@ -107,7 +107,7 @@ func convertPNGtoJPEG(path, OutputPath string, Quality int) error {
 	}
 	outputFile := strings.TrimSuffix(filepath.Base(path), filepath.Ext(path))
 
-	fmt.Println("Converting file" + path + " to " + OutputPath + "/" + outputFile + ".jpeg")
+	fmt.Println("Converting file " + path + " to " + OutputPath + "/" + outputFile + ".jpeg")
 
 	out, err := os.Create(OutputPath + "/" + outputFile + ".jpeg")
 	if err != nil {
