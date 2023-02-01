@@ -33,7 +33,7 @@ example: png2jpeg --single ./images/test.png
 
 --batch -b <required>  /path/to/image/files
 
-example: png2jpeg --path ./images/
+example: png2jpeg --batch ./images/
 
 --output -o [optional] /path/to/output/images
 
