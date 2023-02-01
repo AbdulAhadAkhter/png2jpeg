@@ -27,7 +27,9 @@ Convert command takes the following flags:
 ```
 --single -s <required>  /path/to/image/file.png
 
-example: png2jpeg --path ./images/test.png
+example: png2jpeg --single ./images/test.png
+
+                  or
 
 --batch -b <required>  /path/to/image/files
 
