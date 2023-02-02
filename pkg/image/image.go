@@ -21,9 +21,6 @@ func ConvertPNGtoJPEG(path, OutputPath string, Quality int) error {
 		return err
 	}
 
-	if OutputPath == "" {
-		OutputPath, _ = os.Getwd()
-	}
 	if _, err := os.Stat(OutputPath); os.IsNotExist(err) {
 		os.Mkdir(OutputPath, os.ModePerm)
 	}

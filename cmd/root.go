@@ -5,6 +5,7 @@ package cmd
 
 import (
 	"fmt"
+	"path"
 
 	"os"
 	"path/filepath"
@@ -68,6 +69,10 @@ func png2jpeg(cmd *cobra.Command, args []string) {
 			fmt.Println("file does not exist:", SingleFile)
 			os.Exit(1)
 		}
+
+		if OutputPath == "" {
+			OutputPath = path.Dir(SingleFile) + "/output"
+		}
 		fmt.Println("Converting file: ", SingleFile)
 		image.ConvertPNGtoJPEG(SingleFile, OutputPath, Quality)
 	}
@@ -81,6 +86,9 @@ func png2jpeg(cmd *cobra.Command, args []string) {
 		//Handle case if the trailing forward slash isn't provided
 		if !strings.HasSuffix(BatchFolder, "/") {
 			BatchFolder += "/"
+		}
+		if OutputPath == "" {
+			OutputPath = BatchFolder + "output"
 		}
 		//If folder does not exist
 		_, err := os.Stat(BatchFolder)
