@@ -18,9 +18,8 @@ jobs:
         run: go build -v ./main.go
         
       - name: Create Release
-        uses: actions/create-release@v1
+        uses: elgohr/Github-Release-Action@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.run_number }}
+          title: Rlease
