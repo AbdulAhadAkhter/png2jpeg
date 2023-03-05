@@ -27,7 +27,8 @@ jobs:
         uses: anothrNick/github-tag-action@1.55.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WITH_V: true
+          WITH_V: false
+
       - name: Get current tag
         id: get_tag
         run: echo "::set-output name=TAG::$(git describe --tags --abbrev=0 2>/dev/null || echo '0.0.0')"
