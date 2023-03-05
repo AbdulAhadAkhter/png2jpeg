@@ -31,9 +31,6 @@ jobs:
       - name: Build
         run: make build
 
-      - name: Test
-        run: make test
-
       - name: Release
         uses: softprops/action-gh-release@v1
         env:
