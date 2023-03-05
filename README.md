@@ -47,6 +47,5 @@ example: png2jpeg --path ./images/ --quality 100
 
 ## TODO
 
-* Play around with github actions (DONEISH) 
+* Play around with github actions to build tag and release (DONEISH) 
 * Add tests
-* Build a release pipeline
