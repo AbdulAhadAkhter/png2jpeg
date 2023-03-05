@@ -30,12 +30,10 @@ jobs:
 
       - name: Build
         run: make build
-      - name: Create a Release
-        uses: elgohr/Github-Release-Action@v4
-        env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+      - name: Release
+        uses: softprops/action-gh-release@v1
         with:
-          title: MyReleaseMessage
+          files: dist/png2jpeg
       # - name: Release
       #   uses: softprops/action-gh-release@v1
       #   env:
