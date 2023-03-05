@@ -9,7 +9,7 @@ env:
   GO111MODULE: on
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -19,6 +19,17 @@ jobs:
         uses: actions/setup-go@v3
         with:
           go-version: 1.19.x
+      - name: Get commit message
+        run: echo ::set-output name=commit_message::$(git log -1 --pretty=%B)
+        id: get_commit_message
+
+      - name: Create Tag
+        uses: actions/create-tag@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          message: ${{ steps.get_commit_message.outputs.commit_message }}
 
       - name: Get current tag
         id: get_tag
