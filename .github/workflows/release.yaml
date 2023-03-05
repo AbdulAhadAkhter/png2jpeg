@@ -22,15 +22,12 @@ jobs:
       - name: Get commit message
         run: echo ::set-output name=commit_message::$(git log -1 --pretty=%B)
         id: get_commit_message
-
-      - name: Create Tag
-        uses: actions/create-tag@v1
+  
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.55.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          message: ${{ steps.get_commit_message.outputs.commit_message }}
-
+          WITH_V: true
       - name: Get current tag
         id: get_tag
         run: echo "::set-output name=TAG::$(git describe --tags --abbrev=0 2>/dev/null || echo '0.0.0')"
