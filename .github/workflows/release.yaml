@@ -31,6 +31,10 @@ jobs:
       - name: Build
         run: make build
 
+      - name: Release
+        uses: codfish/semantic-release-action@v2.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # - name: Release
       #   uses: softprops/action-gh-release@v1
       #   env:
