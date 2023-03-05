@@ -1,4 +1,4 @@
-name: Golang CI/CD
+name: Release
 
 on:
   push:
@@ -19,6 +19,7 @@ jobs:
         uses: actions/setup-go@v3
         with:
           go-version: 1.19.x
+
       - name: Get commit message
         run: echo ::set-output name=commit_message::$(git log -1 --pretty=%B)
         id: get_commit_message
