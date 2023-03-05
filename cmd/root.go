@@ -6,10 +6,10 @@ package cmd
 import (
 	"fmt"
 	"path"
-
-	"os"
 	"path/filepath"
 	"strings"
+
+	"os"
 
 	"github.com/abdulahadakhter/png2jpeg/pkg/image"
 	"github.com/spf13/cobra"
@@ -103,3 +103,55 @@ func png2jpeg(cmd *cobra.Command, args []string) {
 		}
 	}
 }
+
+// func png2jpeg(cmd *cobra.Command, args []string) {
+// 	// Open the original image
+// 	img, err := os.Open("original.jpeg")
+// 	if err != nil {
+// 		panic(err)
+// 	}
+// 	defer img.Close()
+
+// 	// Decode the image
+// 	imgData, err := jpeg.Decode(img)
+// 	if err != nil {
+// 		panic(err)
+// 	}
+
+// 	// Get the bounds of the original image
+// 	bounds := imgData.Bounds()
+
+// 	// Calculate the aspect ratio
+// 	// aspectRatio := float64(bounds.Dx()) / float64(bounds.Dy())
+// 	// fmt.Println("ASpect ratio", aspectRatio, "X dimensions", bounds.Dx(), "y dimensions", bounds.Dy())
+// 	// Calculate the size of the border
+// 	borderSize := 150
+// 	newWidth := bounds.Dx() + borderSize*2
+// 	newHeight := bounds.Dy() + borderSize*2
+// 	bordercolor := "black"
+// 	fmt.Println("Height", newHeight, "Width", newWidth)
+// 	// Create a new image with equal borders
+// 	var Border image.Uniform
+// 	if bordercolor == "white" {
+// 		Border = image.Uniform{color.RGBA{255, 255, 255, 255}}
+// 	} else if bordercolor == "black" {
+// 		Border = image.Uniform{color.RGBA{0, 0, 0, 255}}
+// 	}
+
+// 	newImg := image.NewRGBA(image.Rect(0, 0, newWidth, newHeight))
+// 	draw.Draw(newImg, newImg.Bounds(), &Border, image.Point{0, 0}, draw.Src)
+// 	draw.Draw(newImg, bounds.Add(image.Point{borderSize, borderSize}), imgData, image.Point{0, 0}, draw.Src)
+
+// 	// Create a new file to store the bordered image
+// 	newFile, err := os.Create("bordered.jpeg")
+// 	if err != nil {
+// 		panic(err)
+// 	}
+// 	defer newFile.Close()
+
+// 	// Encode the bordered image as a JPEG and write it to the new file
+// 	err = jpeg.Encode(newFile, newImg, nil)
+// 	if err != nil {
+// 		panic(err)
+// 	}
+// }

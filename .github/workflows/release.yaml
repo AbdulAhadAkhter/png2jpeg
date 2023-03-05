@@ -31,13 +31,13 @@ jobs:
       - name: Build
         run: make build
 
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          files: |
-            ./dist/png2jpeg
-          tag_name: ${{ steps.get_tag.outputs.TAG }}
-          release_name: Release ${{ steps.get_tag.outputs.TAG }}
-          body: Release ${{ steps.get_tag.outputs.TAG }} (${{ steps.get_hash.outputs.HASH }})
+      # - name: Release
+      #   uses: softprops/action-gh-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     files: |
+      #       ./dist/png2jpeg
+      #     tag_name: ${{ steps.get_tag.outputs.TAG }}
+      #     release_name: Release ${{ steps.get_tag.outputs.TAG }}
+      #     body: Release ${{ steps.get_tag.outputs.TAG }} (${{ steps.get_hash.outputs.HASH }})
