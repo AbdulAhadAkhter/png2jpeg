@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+    paths:
+      - "**/*"
+      - "!README.md"
 
 env:
   GO111MODULE: on
@@ -23,7 +26,7 @@ jobs:
       - name: Get commit message
         run: echo ::set-output name=commit_message::$(git log -1 --pretty=%B)
         id: get_commit_message
-  
+
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.61.0
         env:
